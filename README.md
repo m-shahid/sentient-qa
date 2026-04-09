@@ -204,7 +204,3 @@ Every layer is swappable via configuration:
 - openapi-typescript (client generation)
 
 ---
-
-## License
-
-MIT

@@ -267,7 +267,7 @@ graph TD
     Start["Step Instruction<br/>+ Page Source"] --> T0{"Tier 0<br/>Cache Lookup"}
     T0 -->|HIT + reliable| Use["Use Cached Locator"]
     T0 -->|MISS or low reliability| T1{"Tier 1<br/>Heuristic Match"}
-    T1 -->|confidence &gt; 0.85| CacheStore1["Cache & Use Locator"]
+    T1 -->|confidence > 0.85| CacheStore1["Cache & Use Locator"]
     T1 -->|low confidence| T2{"Tier 2<br/>Text LLM"}
     T2 -->|resolved| CacheStore2["Cache & Use Locator"]
     T2 -->|fail / low confidence| NeedSS["Request Screenshot<br/>from Stack Client"]
@@ -570,7 +570,7 @@ sequenceDiagram
         else Tier 0 MISS
             T0-->>Pipeline: miss
             Pipeline->>T1: match(page_source, instruction)
-            alt Tier 1 confidence &gt; 0.85
+            alt Tier 1 confidence > 0.85
                 T1-->>Pipeline: Matched locator
                 Pipeline-->>API: resolved: true, tier: HEURISTIC
             else Tier 1 low confidence
@@ -962,5 +962,3 @@ The architecture is designed to accommodate the following enhancements in future
 | **Shadow DOM / iFrame Handling** | Extend page source extractors in stack repos to traverse shadow DOM and iframe boundaries |
 
 ---
-
-*This document serves as the foundational architecture reference for v2 of the framework. Subsequent deliverables (Heuristic Matcher Design, AI Prompt Templates, Plugin Interface Contracts, Data Models, Cost Analysis, etc.) will build upon the structures defined here.*
